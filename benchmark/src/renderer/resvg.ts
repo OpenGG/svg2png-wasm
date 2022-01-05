@@ -48,7 +48,7 @@ export default createRenderer({
     }
   },
 
-  render: async (svg: string) => {
+  render: async (svg: string, svgBuff: Buffer) => {
     // resvg only accept file output
 
     const rand = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
@@ -60,7 +60,7 @@ export default createRenderer({
       (p: ChildProcess) => {
         // write svg to stdin
         if (p.stdin) {
-          p.stdin.end(svg);
+          p.stdin.end(svgBuff);
         }
       },
     );

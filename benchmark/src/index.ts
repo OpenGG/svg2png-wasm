@@ -1,16 +1,28 @@
 import envinfo from 'envinfo';
 import fetch from 'node-fetch';
-import { existsSync, mkdirSync, writeFileSync } from 'fs';
+import { remove, ensureDir, outputFile } from 'fs-extra';
 import { exit } from 'process';
-import { benchmark } from './benchmark';
+import { init, benchmark } from './benchmark';
 import Renderer from './renderer';
+import { readFile } from 'fs/promises';
 
 const svgUrlMap = {
-  icon: 'https://github.com/ssssota/svg2png-wasm/raw/main/logo.svg',
-  tiger: 'https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/tiger.svg',
-  text: 'https://raw.githubusercontent.com/yisibl/resvg-js/main/example/text.svg',
-  animeGirl:
-    'https://upload.wikimedia.org/wikipedia/commons/c/c2/Anime_Girl.svg',
+  icon: '../logo.svg',
+  tiger: './input/tiger.svg',
+  text: './input/text.svg',
+  animeGirl: './input/animeGirl.svg',
+};
+
+const imageDir = 'results';
+
+const load = async (url: string) => {
+  if (url.startsWith('http')) {
+    const res = await fetch(url);
+    const ab = await res.arrayBuffer();
+    return Buffer.from(ab);
+  }
+
+  return readFile(url);
 };
 
 const createMarkdown = (reports: string[], env: string) => `
@@ -26,18 +38,28 @@ ${reports.join('\n')}
 const createReport = async (
   title: string,
   svgUrl: string,
-  imageDir = 'results',
+  imageDir: string,
 ): Promise<string> => {
-  if (!existsSync(imageDir)) mkdirSync(imageDir);
-  const svg = await fetch(svgUrl).then((res) => res.text());
-  const { summary, outputs } = await benchmark(title, svg);
-  Object.entries(outputs).map(([rendererName, output]) => {
-    writeFileSync(`${imageDir}/${title}-${rendererName}.png`, output);
-  });
+  const ab = await load(svgUrl);
+  const buff = Buffer.from(ab);
+  const svg = buff.toString('utf8');
+
+  // first run: init renderers, draw png and save
+  const outputs = await init(title, svg, buff);
+
+  await Promise.all(
+    Object.values(outputs).map(({ filename, buffer }) =>
+      outputFile(`${imageDir}/${filename}`, buffer),
+    ),
+  );
+
+  // bench suite
+  const summary = await benchmark(title, svg, buff);
+
   return `
 ## ${title}
 
-Source SVG: ${svgUrl}
+Source SVG: [${title}](${svgUrl})
 
 |Renderer|Speed|Output|
 |:-------|----:|:----:|
@@ -47,7 +69,7 @@ ${summary.results
     const entries = [
       name,
       `${emphasis}${ops} ops/s, ±${margin}%${emphasis}`,
-      `![${name} output](${imageDir}/${title}-${name}.png)`,
+      `![${name} output](${imageDir}/${outputs[name].filename})`,
     ];
     return `|${entries.join('|')}|`;
   })
@@ -61,8 +83,11 @@ const main = async () => {
   const reports: string[] = [];
   const entries = Object.entries(svgUrlMap);
   // Benchmarks should not parallelize.
+
+  await remove(imageDir);
+  await ensureDir(imageDir);
   for (const [title, svgUrl] of entries) {
-    const r = await createReport(title, svgUrl);
+    const r = await createReport(title, svgUrl, imageDir);
     reports.push(r);
   }
   const env = await envinfo.run({
@@ -71,7 +96,7 @@ const main = async () => {
     npmPackages: Object.keys(Renderer),
   });
   const markdown = createMarkdown(reports, env);
-  writeFileSync('README.md', markdown);
+  await outputFile('README.md', markdown);
 };
 
 main()

@@ -52,22 +52,27 @@ importers:
 
   benchmark:
     specifiers:
+      '@napi-rs/canvas': ^0.1.19
       '@resvg/resvg-js': ^1.3.0
       '@swc/cli': ^0.1.55
       '@swc/core': ^1.2.126
       '@types/envinfo': ^7.8.1
+      '@types/fs-extra': ^9.0.13
       '@types/sharp': ^0.29.5
       benny: ^3.7.1
       envinfo: ^7.8.1
+      fs-extra: ^10.0.0
       node-fetch: ^3.1.0
       sharp: ^0.29.3
       svg2img: ^0.9.4
       svg2png-wasm: link:..
       typescript: ^4.5.4
     dependencies:
+      '@napi-rs/canvas': 0.1.19
       '@resvg/resvg-js': 1.3.0
       benny: 3.7.1
       envinfo: 7.8.1
+      fs-extra: r2.cnpmjs.org/fs-extra/10.0.0
       node-fetch: 3.1.0
       sharp: 0.29.3
       svg2img: 0.9.4
@@ -76,6 +81,7 @@ importers:
       '@swc/cli': 0.1.55_@swc+core@1.2.126
       '@swc/core': 1.2.126
       '@types/envinfo': 7.8.1
+      '@types/fs-extra': r2.cnpmjs.org/@types/fs-extra/9.0.13
       '@types/sharp': 0.29.5
       typescript: 4.5.4
 
@@ -749,6 +755,102 @@ packages:
       tar: 6.1.11
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /@napi-rs/canvas-android-arm64/0.1.19:
+    resolution: {integrity: sha512-HSMvj4FpY/EW1yQ2KcpodCb9NGt8leDZqlFf+ORR+K6e4FQ5N42zbiABkNrzje8qCD37+mCWd2IO9P/onBCYCQ==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [android]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@napi-rs/canvas-darwin-arm64/0.1.19:
+    resolution: {integrity: sha512-ammO0vS5NFzyFWTdiA0mfKyaTgITinCfGo33m/Xw6vX4FlT3gRhvOQZUIwSr7Uxh39TUr0Jb1DQRpUR3zSXKHA==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [darwin]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@napi-rs/canvas-darwin-x64/0.1.19:
+    resolution: {integrity: sha512-KZt5Ey1ETlMHYwVd2cyv3nP6hOl9ouspcJKsphLyZMZ4bGjTGk2FK85ieUS5uko5KkAI/7T6SnCSXsTzb5YsUw==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [darwin]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@napi-rs/canvas-linux-arm-gnueabihf/0.1.19:
+    resolution: {integrity: sha512-6ksFDGbILCo9i3Oara0035kUjvP+uT1nEwcIGMj6v+LjV6pK8j/imYv+ilKKQc95t2dfqAbh9LLfg/HpJxGaFQ==}
+    engines: {node: '>= 10'}
+    cpu: [arm]
+    os: [linux]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@napi-rs/canvas-linux-arm64-gnu/0.1.19:
+    resolution: {integrity: sha512-GjIOj1x0IGz8J7Fom2LdZrhKUjbOXrytooi57JPvYFRW0ial9lshW8Adnq78yTH+d7iEapOKUEFAtWWq9r0umw==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [linux]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@napi-rs/canvas-linux-arm64-musl/0.1.19:
+    resolution: {integrity: sha512-6ikcZzSDr5Uvk3AzF/E3bw+6l2VATb1YWGC9uJmmtuPG/e8rRk3r3fi2tq+EtoUIT508MJHQYWB7A0Q6Ztybxg==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [linux]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@napi-rs/canvas-linux-x64-gnu/0.1.19:
+    resolution: {integrity: sha512-6uHDsXZGuDpZa53NIbkqYng4Cjz5pqVGgfxLDT6T+Lx7I9JeoJi/vBPyB4BLZjdWtY8YhZFWPQIb9bbA6RLMFg==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@napi-rs/canvas-linux-x64-musl/0.1.19:
+    resolution: {integrity: sha512-WeOOySiwexF91baetu7R193W9i1hfFMVHF+n6vxhwVxh09ahisL+AKhPNKJlouTizXYTvlinALZOnKmiTf7FHA==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@napi-rs/canvas-win32-x64-msvc/0.1.19:
+    resolution: {integrity: sha512-5RP4n9NsZsYi+Bg08Nd3VULr1+m2EC72OR0D77XqOIh5SXT+Hje+9x3FKgFCDEhaVAVqh5HUzYVD7BJhrXSsMA==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [win32]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@napi-rs/canvas/0.1.19:
+    resolution: {integrity: sha512-bpM/IU+j21y3FrV0Gn+NxPXAid+wTtdNyEQC0DdoycmY8xBSnZ9dgwUzVSjpk6yyrRw1d+mPZjvw0IPc0P1v2g==}
+    engines: {node: '>= 10'}
+    optionalDependencies:
+      '@napi-rs/canvas-android-arm64': 0.1.19
+      '@napi-rs/canvas-darwin-arm64': 0.1.19
+      '@napi-rs/canvas-darwin-x64': 0.1.19
+      '@napi-rs/canvas-linux-arm-gnueabihf': 0.1.19
+      '@napi-rs/canvas-linux-arm64-gnu': 0.1.19
+      '@napi-rs/canvas-linux-arm64-musl': 0.1.19
+      '@napi-rs/canvas-linux-x64-gnu': 0.1.19
+      '@napi-rs/canvas-linux-x64-musl': 0.1.19
+      '@napi-rs/canvas-win32-x64-msvc': 0.1.19
     dev: false
 
   /@napi-rs/triples/1.1.0:
@@ -1759,7 +1861,7 @@ packages:
       '@arrows/multimethod': 1.4.1
       benchmark: 2.1.4
       common-tags: 1.8.2
-      fs-extra: 10.0.0
+      fs-extra: r2.cnpmjs.org/fs-extra/10.0.0
       json2csv: 5.0.6
       kleur: 4.1.4
       log-update: 4.0.0
@@ -3311,15 +3413,6 @@ packages:
     resolution: {integrity: sha1-a+Dem+mYzhavivwkSXue6bfM2a0=}
     dev: false
 
-  /fs-extra/10.0.0:
-    resolution: {integrity: sha1-n/YbZV3eU/s0qC34S7IUzoAuF8E=}
-    engines: {node: '>=12'}
-    dependencies:
-      graceful-fs: 4.2.8
-      jsonfile: 6.1.0
-      universalify: 2.0.0
-    dev: false
-
   /fs-minipass/2.1.0:
     resolution: {integrity: sha1-f1A2/b8SxjwWkZDL5BmchSJx+fs=}
     engines: {node: '>= 8'}
@@ -3475,6 +3568,7 @@ packages:
 
   /graceful-fs/4.2.8:
     resolution: {integrity: sha1-5BK40z9eAGWTy9PO5t+fLOu+gCo=}
+    dev: true
 
   /has-bigints/1.0.1:
     resolution: {integrity: sha1-ZP5qywIGc+O3jbA1pa9pqp0HsRM=}
@@ -4496,14 +4590,6 @@ packages:
     dependencies:
       minimist: 1.2.5
     dev: true
-
-  /jsonfile/6.1.0:
-    resolution: {integrity: sha1-vFWyY0eTxnnsZAMJTrE2mKbsCq4=}
-    dependencies:
-      universalify: 2.0.0
-    optionalDependencies:
-      graceful-fs: 4.2.8
-    dev: false
 
   /jsonparse/1.3.1:
     resolution: {integrity: sha1-P02uSpH6wxX3EGL4UhzCOfE2YoA=}
@@ -6613,11 +6699,6 @@ packages:
     resolution: {integrity: sha1-tkb2m+OULavOzJ1mOcgNwQXvqmY=}
     engines: {node: '>= 4.0.0'}
 
-  /universalify/2.0.0:
-    resolution: {integrity: sha1-daSYTv7cSwiXXFrrc/Uw0C3yVxc=}
-    engines: {node: '>= 10.0.0'}
-    dev: false
-
   /untildify/4.0.0:
     resolution: {integrity: sha1-K8lHuVNlJIfkYAlJ+wkeOujNkZs=}
     engines: {node: '>=8'}
@@ -6902,3 +6983,45 @@ packages:
       y18n: 5.0.8
       yargs-parser: 21.0.0
     dev: true
+
+  r2.cnpmjs.org/@types/fs-extra/9.0.13:
+    resolution: {integrity: sha512-nEnwB++1u5lVDM2UI4c1+5R+FYaKfaAzS4OococimjVm3nQw3TuzH5UNsocrcTBbhnerblyHj4A49qXbIiZdpA==, registry: http://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/@types/fs-extra/-/fs-extra-9.0.13.tgz}
+    name: '@types/fs-extra'
+    version: 9.0.13
+    dependencies:
+      '@types/node': 17.0.6
+    dev: true
+
+  r2.cnpmjs.org/fs-extra/10.0.0:
+    resolution: {integrity: sha512-C5owb14u9eJwizKGdchcDUQeFtlSHHthBk8pbX9Vc1PFZrLombudjDnNns88aYslCyF6IY5SUw3Roz6xShcEIQ==, registry: http://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/fs-extra/-/fs-extra-10.0.0.tgz}
+    name: fs-extra
+    version: 10.0.0
+    engines: {node: '>=12'}
+    dependencies:
+      graceful-fs: r2.cnpmjs.org/graceful-fs/4.2.8
+      jsonfile: r2.cnpmjs.org/jsonfile/6.1.0
+      universalify: r2.cnpmjs.org/universalify/2.0.0
+    dev: false
+
+  r2.cnpmjs.org/graceful-fs/4.2.8:
+    resolution: {integrity: sha512-qkIilPUYcNhJpd33n0GBXTB1MMPp14TxEsEs0pTrsSVucApsYzW5V+Q8Qxhik6KU3evy+qkAAowTByymK0avdg==, registry: http://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/graceful-fs/-/graceful-fs-4.2.8.tgz}
+    name: graceful-fs
+    version: 4.2.8
+    dev: false
+
+  r2.cnpmjs.org/jsonfile/6.1.0:
+    resolution: {integrity: sha512-5dgndWOriYSm5cnYaJNhalLNDKOqFwyDB/rr1E9ZsGciGvKPs8R2xYGCacuf3z6K1YKDz182fd+fY3cn3pMqXQ==, registry: http://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/jsonfile/-/jsonfile-6.1.0.tgz}
+    name: jsonfile
+    version: 6.1.0
+    dependencies:
+      universalify: r2.cnpmjs.org/universalify/2.0.0
+    optionalDependencies:
+      graceful-fs: r2.cnpmjs.org/graceful-fs/4.2.8
+    dev: false
+
+  r2.cnpmjs.org/universalify/2.0.0:
+    resolution: {integrity: sha512-hAZsKq7Yy11Zu1DE0OzWjw7nnLZmJZYTDZZyEFHZdUhV8FkH5MCfoU1XMaxXovpyW5nq5scPqq0ZDP9Zyl04oQ==, registry: http://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/universalify/-/universalify-2.0.0.tgz}
+    name: universalify
+    version: 2.0.0
+    engines: {node: '>= 10.0.0'}
+    dev: false

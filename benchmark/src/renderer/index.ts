@@ -3,6 +3,7 @@ import sharp from './sharp';
 import svg2pngWasm from './svg2png-wasm';
 import resvgjs from './resvg-js';
 import resvg from './resvg';
+import skrCanvas from './skr-canvas';
 import { Renderer } from './types';
 export * from './types';
 
@@ -10,8 +11,9 @@ export const rendererMap: {
   [k: string]: Renderer;
 } = {
   'svg2png-wasm': svg2pngWasm,
-  'resvg-js': resvgjs,
+  '@resvg/resvg-js': resvgjs,
   resvg,
+  '@napi-rs/canvas': skrCanvas,
   sharp,
   // disabled due to throwing
   // svg2img,

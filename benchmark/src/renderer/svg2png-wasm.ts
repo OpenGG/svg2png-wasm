@@ -15,5 +15,5 @@ export default createRenderer({
 
     await initialize(buffer);
   },
-  render: svg2png,
+  render: (svg: string) => svg2png(svg),
 });

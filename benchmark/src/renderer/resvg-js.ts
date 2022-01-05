@@ -1,9 +1,9 @@
 import { createRenderer } from './types';
-import { renderAsync } from '@resvg/resvg-js';
+import { render } from '@resvg/resvg-js';
 
 export default createRenderer({
   render: (svg: string) =>
-    renderAsync(svg, {
+    render(svg, {
       font: {
         loadSystemFonts: false,
       },
