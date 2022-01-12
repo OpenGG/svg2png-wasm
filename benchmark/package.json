@@ -4,8 +4,9 @@
   "main": "dist/index.js",
   "type": "module",
   "scripts": {
-    "start": "npm run build && node --experimental-specifier-resolution=node dist/index",
+    "start": "npm run build && npm run bench",
     "build": "swc src -d dist",
+    "bench": "DISABLE_SYSTEM_FONTS_LOAD=true node --experimental-specifier-resolution=node dist/index",
     "check": "tsc --noEmit"
   },
   "dependencies": {

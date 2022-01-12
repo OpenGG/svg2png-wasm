@@ -1,6 +1,7 @@
 import { createRenderer } from './types';
 import { readFile, unlink } from 'fs/promises';
 import { spawn, ChildProcess } from 'child_process';
+import { fontPath } from './font.js';
 const call = (
   cmd: string,
   args: string[],
@@ -48,7 +49,7 @@ export default createRenderer({
     }
   },
 
-  render: async (svg: string, svgBuff: Buffer) => {
+  render: async (svg, svgBuffer) => {
     // resvg only accept file output
 
     const rand = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
@@ -56,11 +57,18 @@ export default createRenderer({
 
     await call(
       'resvg',
-      ['--skip-system-fonts', '-', outFile],
+      [
+        '--use-font-file',
+        fontPath,
+        '--skip-system-fonts',
+        '--list-fonts',
+        '-',
+        outFile,
+      ],
       (p: ChildProcess) => {
         // write svg to stdin
         if (p.stdin) {
-          p.stdin.end(svgBuff);
+          p.stdin.end(svgBuffer);
         }
       },
     );

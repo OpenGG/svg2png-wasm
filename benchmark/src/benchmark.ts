@@ -12,18 +12,22 @@ type OutputValue = {
 
 type Outputs = Record<string, OutputValue>;
 
-export const init = async (
-  title: string,
-  svg: string,
-  svgBuff: Buffer,
-): Promise<Outputs> => {
+export const init = async ({
+  title,
+  svg,
+  svgBuffer,
+}: {
+  title: string;
+  svg: string;
+  svgBuffer: Buffer;
+}): Promise<Outputs> => {
   const res = await Promise.all(
     rendererEntries.map(async ([rendererName, renderer]) => {
       if (renderer.init) {
         await renderer.init();
       }
 
-      const buffer = await renderer.render(svg, svgBuff);
+      const buffer = await renderer.render(svg, svgBuffer);
 
       const filename = `${sanitize(title)}-${sanitize(rendererName)}.png`;
 
@@ -33,15 +37,19 @@ export const init = async (
   return Object.fromEntries<OutputValue>(res);
 };
 
-export const benchmark = (
-  title: string,
-  svg: string,
-  svgBuff: Buffer,
-): Promise<Summary> =>
+export const benchmark = ({
+  title,
+  svg,
+  svgBuffer,
+}: {
+  title: string;
+  svg: string;
+  svgBuffer: Buffer;
+}): Promise<Summary> =>
   suite(
     `Convert SVG to PNG: ${title}`,
     ...rendererEntries.map(([rendererName, renderer]) =>
-      add(rendererName, () => renderer.render(svg, svgBuff)),
+      add(rendererName, () => renderer.render(svg, svgBuffer)),
     ),
     cycle(),
     complete(),

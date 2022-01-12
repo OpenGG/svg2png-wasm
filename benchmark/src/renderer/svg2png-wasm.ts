@@ -1,5 +1,6 @@
 import { readFile } from 'fs/promises';
 import { initialize, svg2png } from 'svg2png-wasm';
+import { fontBuffer } from './font.js';
 import { createRenderer } from './types';
 
 let inited = false;
@@ -15,5 +16,8 @@ export default createRenderer({
 
     await initialize(buffer);
   },
-  render: (svg: string) => svg2png(svg),
+  render: (svg) =>
+    svg2png(svg, {
+      fonts: [fontBuffer],
+    }),
 });

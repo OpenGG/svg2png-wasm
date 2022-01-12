@@ -1,16 +1,24 @@
 import { createRenderer } from './types';
-
-import { createCanvas, Image } from '@napi-rs/canvas';
+import { createCanvas, Image, GlobalFonts } from '@napi-rs/canvas';
 
 import assert from 'assert/strict';
+import { fontFamily, fontPath } from './font.js';
 
 let image: Image;
 export default createRenderer({
   init() {
+    GlobalFonts.registerFromPath(fontPath);
+
+    const font = GlobalFonts.families.find(
+      ({ family }) => family === fontFamily,
+    );
+
+    assert.ok(font, 'Failed to resolve font family');
+
     image = new Image();
   },
-  render(svg: string, svgBuff: Buffer) {
-    image.src = svgBuff;
+  render(svg, svgBuffer) {
+    image.src = svgBuffer;
 
     const w = image.naturalWidth;
     const h = image.naturalHeight;

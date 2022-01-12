@@ -35,17 +35,25 @@ ${env.replace(/^[\r\n]+/, '').replace(/[\r\n]+$/, '')}
 ${reports.join('\n')}
 `;
 
-const createReport = async (
-  title: string,
-  svgUrl: string,
-  imageDir: string,
-): Promise<string> => {
+const createReport = async ({
+  title,
+  svgUrl,
+  imageDir,
+}: {
+  title: string;
+  svgUrl: string;
+  imageDir: string;
+}): Promise<string> => {
   const ab = await load(svgUrl);
-  const buff = Buffer.from(ab);
-  const svg = buff.toString('utf8');
+  const svgBuffer = Buffer.from(ab);
+  const svg = svgBuffer.toString('utf8');
 
   // first run: init renderers, draw png and save
-  const outputs = await init(title, svg, buff);
+  const outputs = await init({
+    title,
+    svg,
+    svgBuffer,
+  });
 
   await Promise.all(
     Object.values(outputs).map(({ filename, buffer }) =>
@@ -54,7 +62,11 @@ const createReport = async (
   );
 
   // bench suite
-  const summary = await benchmark(title, svg, buff);
+  const summary = await benchmark({
+    title,
+    svg,
+    svgBuffer,
+  });
 
   return `
 ## ${title}
@@ -87,7 +99,11 @@ const main = async () => {
   await remove(imageDir);
   await ensureDir(imageDir);
   for (const [title, svgUrl] of entries) {
-    const r = await createReport(title, svgUrl, imageDir);
+    const r = await createReport({
+      title,
+      svgUrl,
+      imageDir,
+    });
     reports.push(r);
   }
   const env = await envinfo.run({

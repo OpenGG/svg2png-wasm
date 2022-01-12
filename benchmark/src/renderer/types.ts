@@ -1,10 +1,12 @@
 export type Render = (
   svg: string,
-  svgBuff: Buffer,
+  svgBuffer: Buffer,
 ) => Uint8Array | Promise<Uint8Array>;
 
+type Init = () => void | Promise<void>;
+
 export type Renderer = {
-  init?: () => void | Promise<void>;
+  init?: Init;
   render: Render;
 };
 
